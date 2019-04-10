@@ -1,0 +1,60 @@
+﻿@model IEnumerable<EBook_Reader.Models.Comments>
+
+@{
+    ViewData["Title"] = "Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Comments</h1>
+
+<p>
+    <a asp-action="Index">Add New Comment with Add Comment link on Document List</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CommentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Document)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td style="padding: 0.1em;">
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td style="padding: 0.1em;">
+                @Html.DisplayFor(modelItem => item.CommentDate)
+            </td>
+            <td style="padding: 0.1em;">
+                @Html.DisplayFor(modelItem => item.Document.DocumentName)
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td style="padding: 0.1em;">
+
+                    <a asp-action="editComment" asp-route-id="@item.CommentsId">Edit Comment</a> |
+                    <a asp-action="deleteComment" asp-route-id="@item.CommentsId">Delete Comment</a>
+                   
+                </td>
+            }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to Document List</a>
+</div>
+
+
+

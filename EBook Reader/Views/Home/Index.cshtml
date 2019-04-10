@@ -1,0 +1,53 @@
+﻿@model IEnumerable<EBook_Reader.Models.Document>
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index - List of Documents</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="addDocument">Add New Document</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DocumentName)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.UpdatedDate)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DocumentName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>*@
+                <td>
+                    <a asp-action="editDocument" asp-route-id="@item.DocumentId">Edit Document</a> |
+                    <a asp-action="documentDetails" asp-route-id="@item.DocumentId">Document Details</a> |
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="deleteDocument" asp-route-id="@item.DocumentId">Delete Document</a>
+                    }|
+                    <a asp-action="addComment" asp-route-id="@item.DocumentId">Add Comments</a> |
+                    <a asp-action="viewComment" asp-route-id="@item.DocumentId">View Comments</a> |
+                    <a asp-action="editComment" asp-route-id="@item.DocumentId">Edit Comments</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--<object data="~/Documents/LOR.pdf" type="application/pdf">
+</object>-->
