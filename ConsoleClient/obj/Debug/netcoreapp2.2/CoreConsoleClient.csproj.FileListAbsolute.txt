@@ -1,0 +1,32 @@
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.Views.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.Views.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.deps.json
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.runtimeconfig.json
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.runtimeconfig.dev.json
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.csprojAssemblyReference.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.csproj.CoreCompileInputs.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.AssemblyInfoInputs.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.AssemblyInfo.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.csproj.CopyComplete
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Lab13 Narendra Katamaneni\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.Views.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.Views.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.deps.json
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.runtimeconfig.json
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.runtimeconfig.dev.json
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\CoreConsoleClient.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\bin\Debug\netcoreapp2.2\EBook Reader.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.csprojAssemblyReference.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.csproj.CoreCompileInputs.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.AssemblyInfoInputs.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.AssemblyInfo.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.csproj.CopyComplete
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\ConsoleClient\obj\Debug\netcoreapp2.2\CoreConsoleClient.pdb

@@ -42,3 +42,6 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\editDocument.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\viewComment.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csprojAssemblyReference.cache
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\viewDocument.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\HomePage.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\itextsharp.dll

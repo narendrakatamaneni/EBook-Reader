@@ -9,6 +9,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using System.Text;
+using EBook_Reader.Models;
 
 namespace EBook_Reader.Controllers
 {
@@ -16,12 +23,19 @@ namespace EBook_Reader.Controllers
     {
         private readonly ApplicationDbContext context_;
         private const string sessionId_ = "SessionId";
+       
 
         public HomeController(ApplicationDbContext context)
         {
             context_ = context;
         }
         public IActionResult Index()
+        {
+            //return View(context_.Documents.ToList<Document>());
+            return View();
+        }
+
+        public IActionResult HomePage()
         {
             return View(context_.Documents.ToList<Document>());
         }
@@ -44,10 +58,20 @@ namespace EBook_Reader.Controllers
         [HttpPost]
         public IActionResult addDocument(int id, Document crs)
         {
+            var request = HttpContext.Request;
+            foreach (var file in request.Form.Files)
+            {
+                if (file.Length > 0)
+                {
+                    crs.DocumentName = file.FileName;
+                    crs.UpdatedDate = DateTime.Today;
+                }
+            }
             context_.Documents.Add(crs);
             context_.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("HomePage");
         }
+
 
         //----< shows details for each document >----------------------
 
@@ -79,6 +103,26 @@ namespace EBook_Reader.Controllers
             return View(document);
         }
 
+
+        public ActionResult viewDocument()
+        {
+            DocumentView documentView = new DocumentView();
+            var filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\wwwroot\FileStorage\";
+                var files = Directory.GetFiles(filePath).ToList<string>();
+                using (PdfReader reader = new PdfReader(files[0]))
+                {
+                    StringBuilder text = new StringBuilder();
+                    for (int i = 1; i <= reader.NumberOfPages; i++)
+                    {
+                        text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
+
+                    }
+                    
+                    documentView.textContent = text.ToString();
+                }
+            return View(documentView);
+        }
+         
 
         //----< gets form to edit a specific document via id >---------
 
@@ -120,7 +164,7 @@ namespace EBook_Reader.Controllers
                     // do nothing for now
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("HomePage");
         }
         //----< deletes a document by id >-----------------------------
         /*
@@ -146,7 +190,7 @@ namespace EBook_Reader.Controllers
             {
                 // nothing for now
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("HomePage");
         }
 
         //----< show list of lectures, ordered by Title >------------
@@ -229,7 +273,7 @@ namespace EBook_Reader.Controllers
                     // do nothing for now
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("HomePage");
         }
 
 
@@ -259,7 +303,7 @@ namespace EBook_Reader.Controllers
             {
                 // nothing for now
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("HomePage");
         }
 
         //----< gets form to edit a specific comment via id >---------
@@ -305,7 +349,7 @@ namespace EBook_Reader.Controllers
                     // do nothing for now
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("HomePage");
         }
 
 

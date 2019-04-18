@@ -77,7 +77,8 @@ namespace EBook_Reader.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    //return LocalRedirect("~/Views/Home/HomePage.cshtml");
+                    return RedirectToAction("HomePage", "Home");
                 }
                 if (result.RequiresTwoFactor)
                 {
