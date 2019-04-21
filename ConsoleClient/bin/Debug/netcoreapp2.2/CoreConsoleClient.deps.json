@@ -1139,10 +1139,19 @@
       },
       "EBook Reader/1.0.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3",
+          "itextsharp": "5.5.0.0"
         },
         "runtime": {
           "EBook Reader.dll": {}
+        }
+      },
+      "itextsharp.Reference/5.5.0.0": {
+        "runtime": {
+          "itextsharp.dll": {
+            "assemblyVersion": "5.5.0.0",
+            "fileVersion": "5.5.0.0"
+          }
         }
       }
     }
@@ -1848,6 +1857,11 @@
     },
     "EBook Reader/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "itextsharp.Reference/5.5.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

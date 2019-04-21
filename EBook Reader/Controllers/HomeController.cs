@@ -23,7 +23,6 @@ namespace EBook_Reader.Controllers
     {
         private readonly ApplicationDbContext context_;
         private const string sessionId_ = "SessionId";
-       
 
         public HomeController(ApplicationDbContext context)
         {
@@ -34,6 +33,11 @@ namespace EBook_Reader.Controllers
             //return View(context_.Documents.ToList<Document>());
             return View();
         }
+
+        //public IActionResult Login()
+        //{
+        //    return RedirectToPage("/Areas/Identity/Pages/Account/Login.cshtml");
+        //}
 
         public IActionResult HomePage()
         {
@@ -58,17 +62,23 @@ namespace EBook_Reader.Controllers
         [HttpPost]
         public IActionResult addDocument(int id, Document crs)
         {
-            var request = HttpContext.Request;
-            foreach (var file in request.Form.Files)
-            {
-                if (file.Length > 0)
-                {
-                    crs.DocumentName = file.FileName;
-                    crs.UpdatedDate = DateTime.Today;
-                }
-            }
-            context_.Documents.Add(crs);
-            context_.SaveChanges();
+            //var request = HttpContext.Request;
+            //string sessionUserName = HttpContext.Session.GetString("SessionUserName");
+            //foreach (var file in request.Form.Files)
+            //{
+            //    if (file.Length > 0)
+            //    {
+            //        crs.DocumentName = file.FileName;
+            //        crs.userName = sessionUserName;
+            //        crs.UpdatedDate = DateTime.Today;
+            //    }
+            //}          
+            //context_.Documents.Add(crs);
+            
+            //context_.SaveChanges();
+
+
+
             return RedirectToAction("HomePage");
         }
 
@@ -262,6 +272,7 @@ namespace EBook_Reader.Controllers
                     List<Comments> comments = new List<Comments>();
                     document.Comments = comments;
                 }
+                lct.CommentDate = DateTime.Today;
                 document.Comments.Add(lct);
 
                 try
@@ -351,8 +362,12 @@ namespace EBook_Reader.Controllers
             }
             return RedirectToAction("HomePage");
         }
-
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("SessionUserName", null);
+            //return View(context_.Documents.ToList<Document>());
+            return RedirectToAction("Index");
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\FileStorage\" />
+    <Folder Include="wwwroot\pages\" />
   </ItemGroup>
 
 

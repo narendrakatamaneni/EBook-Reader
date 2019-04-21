@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace EBook_Reader.Areas.Identity.Pages.Account
 {
@@ -17,6 +18,7 @@ namespace EBook_Reader.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private const string sessionUserName_ = "SessionUserName";
 
         public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
         {
@@ -78,6 +80,7 @@ namespace EBook_Reader.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     //return LocalRedirect("~/Views/Home/HomePage.cshtml");
+                    HttpContext.Session.SetString(sessionUserName_, Input.Email);
                     return RedirectToAction("HomePage", "Home");
                 }
                 if (result.RequiresTwoFactor)

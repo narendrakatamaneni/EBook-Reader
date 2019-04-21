@@ -21,26 +21,25 @@ namespace EBook_Reader.Controllers
             filePath = Path.Combine(webRootPath, "FileStorage");
         }
         [HttpPost]
-        public IActionResult AddDocument()
+        public async Task<IActionResult> AddDocument()
         {
             var request = HttpContext.Request;
             foreach (var file in request.Form.Files)
             {
                 if (file.Length > 0)
                 {
-                   
-                    var filePath = Path.Combine(hostingEnvironment_.WebRootPath, "FileStorage");
-                    String password = null;
-                    var files = Directory.GetFiles(filePath).ToList<string>();
-                    //PdfDocument pdfDocument = new PdfDocument(files[0], password);
-                    //pdfDocument.ToJpegImages(filePath);
+                    var path = Path.Combine(filePath, file.FileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
                 }
                 else
                 {
                     return BadRequest();
                 }
             }
-            return RedirectToAction("HomePage");
+            return Ok();
         }
     }
 }

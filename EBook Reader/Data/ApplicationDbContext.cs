@@ -16,5 +16,6 @@ namespace EBook_Reader.Data
         }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Comments> Comments { get; set; }
+        
     }
 }

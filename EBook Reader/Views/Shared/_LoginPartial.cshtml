@@ -7,7 +7,7 @@
 {
     <div style="float:right">
         <a style="float:left" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.Name!</a>
-        <form style="float:left" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <form style="float:left" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Logout", "Home", new { area = "" })">
             <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
         </form>
         </div>

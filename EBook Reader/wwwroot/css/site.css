@@ -88,8 +88,7 @@ header {
 }
 
 .header a.active {
-background-color: black !important;
-color: white;
+color:black;
 }
 
 .header a {

@@ -8,6 +8,7 @@ namespace EBook_Reader.Models
     public class Document
     {
         public int DocumentId { get; set; }
+        public string userName { get; set; }
         public string DocumentName { get; set; }
         public DateTime UpdatedDate { get; set; }
 

@@ -8,7 +8,7 @@
 
 <h4>Comment</h4>
 <hr />
-<div class="row">
+<div class="login">
     <div class="col-md-4">
         <form asp-action="addComment">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -18,11 +18,11 @@
                 <input asp-for="Comment" class="form-control" />
                 <span asp-validation-for="Comment" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="CommentDate" class="control-label"></label>
                 <input asp-for="CommentDate" class="form-control" />
                 <span asp-validation-for="CommentDate" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-primary" />
             </div>
@@ -31,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="HomePage">Back to List</a>
 </div>
 
 @section Scripts {
