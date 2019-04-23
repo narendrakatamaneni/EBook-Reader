@@ -44,3 +44,4 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csproj.CopyComplete
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.dll
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csprojAssemblyReference.cache

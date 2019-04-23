@@ -15,7 +15,9 @@ using System.Reflection;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
 using System.Text;
-using EBook_Reader.Models;
+using EBook_Reader.Helpher;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace EBook_Reader.Controllers
 {
@@ -23,6 +25,7 @@ namespace EBook_Reader.Controllers
     {
         private readonly ApplicationDbContext context_;
         private const string sessionId_ = "SessionId";
+        APIHelper aPIHelper = new APIHelper();
 
         public HomeController(ApplicationDbContext context)
         {
@@ -60,7 +63,7 @@ namespace EBook_Reader.Controllers
         //----< posts back new document details >---------------------
 
         [HttpPost]
-        public IActionResult addDocument(int id, Document crs)
+        public  async Task<IActionResult> addDocument()
         {
             //var request = HttpContext.Request;
             //string sessionUserName = HttpContext.Session.GetString("SessionUserName");
@@ -74,9 +77,25 @@ namespace EBook_Reader.Controllers
             //    }
             //}          
             //context_.Documents.Add(crs);
-            
-            //context_.SaveChanges();
 
+            //context_.SaveChanges();
+            HttpClient client = new HttpClient();
+
+            //HttpClient client = aPIHelper.initial();
+            MultipartFormDataContent multiContent = new MultipartFormDataContent();
+
+            var request = HttpContext.Request;
+            foreach (var file in request.Form.Files)
+            {
+                if (file.Length > 0)
+                {
+                    byte[] data = System.IO.File.ReadAllBytes(file.FileName);
+                    ByteArrayContent bytes = new ByteArrayContent(data);
+                    string fileName = Path.GetFileName(file.ToString());
+                    multiContent.Add(bytes, "files", fileName);
+                   HttpResponseMessage message= await client.PostAsync("http://localhost:52464/", multiContent);
+                }
+            }
 
 
             return RedirectToAction("HomePage");

@@ -20,7 +20,7 @@ namespace RestAPI.Controllers
             public FilesController(IHostingEnvironment hostingEnvironment)
             {
                 hostingEnvironment_ = hostingEnvironment;
-                webRootPath = hostingEnvironment_.WebRootPath;
+                webRootPath = hostingEnvironment_.ContentRootPath;
                 filePath = Path.Combine(webRootPath, "FileStorage");
             }
             ////----< show files in wwwroot/FileStorage >----------------
@@ -128,55 +128,56 @@ namespace RestAPI.Controllers
         {".csv", "text/csv"}
       };
             }
-            //----< upload file >--------------------------------------
+        //----< upload file >--------------------------------------
 
-            // POST api/<controller>
-            [HttpPost]
-            public async Task<IActionResult> Upload()
+        // POST api/<controller>
+        //[HttpPost]
+        //public async Task<IActionResult> Upload()
+        //{
+        //    var request = HttpContext.Request;
+
+        //    foreach (var file in request.Form.Files)
+        //    {
+        //        if (file.Length > 0)
+        //        {
+        //            var path = Path.Combine(filePath, file.FileName);
+        //            using (var fileStream = new FileStream(path, FileMode.Create))
+        //            {
+        //                await file.CopyToAsync(fileStream);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return BadRequest();
+        //        }
+        //    }
+        //    return Ok();
+        //}
+
+        // POST api/<controller>
+        // This is the usual technique for uploading files, but I never got more than
+        // one file.  Something wrong with the configuration of my IFormFile model?
+
+        [HttpPost]
+        public async Task<IActionResult> Post(IList<IFormFile> files)
+        {
+            var dummy = HttpContext.Request;  // statement for debugging
+            foreach (var file in dummy.Form.Files)
             {
-                var request = HttpContext.Request;
-                foreach (var file in request.Form.Files)
+                if (file.Length > 0)
                 {
-                    if (file.Length > 0)
+                    var path = Path.Combine(filePath, file.FileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
                     {
-                        var path = Path.Combine(filePath, file.FileName);
-                        using (var fileStream = new FileStream(path, FileMode.Create))
-                        {
-                            await file.CopyToAsync(fileStream);
-                        }
-                    }
-                    else
-                    {
-                        return BadRequest();
+                        await file.CopyToAsync(fileStream);
                     }
                 }
-                return Ok();
             }
+            return Ok();
+        }
 
-            //// POST api/<controller>
-            //// This is the usual technique for uploading files, but I never got more than
-            //// one file.  Something wrong with the configuration of my IFormFile model?
-            //
-            //[HttpPost]
-            //public async Task<IActionResult> Post(IList<IFormFile> files)
-            //{
-            //  var dummy = HttpContext.Request;  // statement for debugging
-            //  foreach (var file in files)
-            //  {
-            //    if (file.Length > 0)
-            //    {
-            //      var path = Path.Combine(filePath, file.FileName);
-            //      using (var fileStream = new FileStream(path, FileMode.Create))
-            //      {
-            //        await file.CopyToAsync(fileStream);
-            //      }
-            //    }
-            //  }
-            //  return Ok();
-            //}
-
-            // PUT api/<controller>/5
-            [HttpPut("{id}")]
+        // PUT api/<controller>/5
+        [HttpPut("{id}")]
             public void Put(int id, [FromBody]string value)
             {
                 // ToDo

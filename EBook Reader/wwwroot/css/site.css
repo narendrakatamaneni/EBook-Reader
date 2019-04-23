@@ -7,6 +7,36 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Control the left side */
+.left { 
+   
+    background-color: #111;
+}
+
+/* Control the right side */
+.right {  
+    background-color: red;
+}
+
+
+.split {
+    height: 50%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

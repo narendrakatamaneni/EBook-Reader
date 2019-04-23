@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using EBook_Reader.Models;
+using System.Net.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace EBook_Reader.Controllers
 {
@@ -21,24 +23,24 @@ namespace EBook_Reader.Controllers
             filePath = Path.Combine(webRootPath, "FileStorage");
         }
         [HttpPost]
-        public async Task<IActionResult> AddDocument()
+        public async Task<IActionResult> AddDocument(List<IFormFile> files)
         {
             var request = HttpContext.Request;
+            HttpClient client = new HttpClient();
             foreach (var file in request.Form.Files)
             {
                 if (file.Length > 0)
                 {
-                    var path = Path.Combine(filePath, file.FileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
+                    //HttpClient client = aPIHelper.initial();
+                    MultipartFormDataContent multiContent = new MultipartFormDataContent();
+                    //var path = Path.Combine(filePath,file.FileName);
+                    byte[] data =System.IO.File.ReadAllBytes(Path.Combine(filePath, file.FileName));
+                    ByteArrayContent bytes = new ByteArrayContent(data);
+                    string fileName = file.FileName;
+                    multiContent.Add(bytes, "files", fileName);
+                    HttpResponseMessage message = await client.PostAsync("http://localhost:52464/api/files/", multiContent);
                     }
                 }
-                else
-                {
-                    return BadRequest();
-                }
-            }
             return Ok();
         }
     }

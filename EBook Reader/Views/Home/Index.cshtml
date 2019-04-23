@@ -4,6 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
+
+<div style="border:2px solid white; height:450px; width:1000px;margin-left:180px;margin-top:30px">
+    <form method="get" asp-controller="" asp-action="">
+        <div style="float:left;border:2px none #56baed;height:inherit; width:400px;">
+            <h1>This section contains the documents necssary for the public people</h1>
+            <button type="submit" value="Public" style="width:inherit">Public</button>
+        </div>
+    </form>
+    <form method="get" asp-controller="" asp-action="">
+        <div style="float:right;border:2px none #56baed;height:inherit; width:400px;">
+            <h1>This section contains the documents necssary for the private people</h1>
+            <button type="submit" value="private" style="width:inherit">Private</button>
+        </div>
+    </form>
 
 </div>
