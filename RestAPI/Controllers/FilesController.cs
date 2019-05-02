@@ -21,7 +21,7 @@ namespace RestAPI.Controllers
             {
                 hostingEnvironment_ = hostingEnvironment;
                 webRootPath = hostingEnvironment_.ContentRootPath;
-                filePath = Path.Combine(webRootPath, "FileStorage");
+                filePath = Path.Combine(webRootPath, "Private FileStorage");
             }
             ////----< show files in wwwroot/FileStorage >----------------
             //

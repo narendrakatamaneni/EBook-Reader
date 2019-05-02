@@ -11,6 +11,7 @@ namespace EBook_Reader.Models
         public string userName { get; set; }
         public string DocumentName { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public string documentType { get; set; }
 
         public ICollection<Comments> Comments { get; set; }
     }

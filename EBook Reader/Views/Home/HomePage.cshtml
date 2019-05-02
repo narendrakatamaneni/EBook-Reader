@@ -5,19 +5,27 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index - List of Documents</h1>
+
+<script src="~/js/epub.js" asp-append-version="true"></script>
+
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-action="addDocument">Add New Document</a>
+        <a asp-action="addDocument" value="Add Book" class="button">Add Book</a>
     </p>
 }
+
+    <div style="margin:30px 480px">
+        <h1>Books Available</h1>
+    </div>
+<div style="margin:40px 70px">
+<!--<a href="~/test.html">test</a>-->
 <table class="table">
     <thead>
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.DocumentName)
-            </th>
+            </th>*@
             @*<th>
                     @Html.DisplayNameFor(model => model.UpdatedDate)
                 </th>*@
@@ -25,27 +33,44 @@
         </tr>
     </thead>
     <tbody>
+
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td style="font-family:Calibri">
                     @Html.DisplayFor(modelItem => item.DocumentName)
                 </td>
                 @*<td>
                         @Html.DisplayFor(modelItem => item.UpdatedDate)
                     </td>*@
                 <td>
-                    <a asp-action="editDocument" asp-route-id="@item.DocumentId">Edit Document</a> |
-                    <a asp-action="viewDocument" asp-route-id="@item.DocumentId">Document Details</a> |
+                    <a asp-action="editDocument" asp-route-id="@item.DocumentId" class="button">Edit Document</a> |
+                    <a asp-action="viewDocument" asp-route-id="@item.DocumentId" class="button">Document Details</a> |
                     @if (User.IsInRole("Admin"))
                     {
-                        <a asp-action="deleteDocument" asp-route-id="@item.DocumentId">Delete Document</a>
+                        <a asp-action="deleteDocument" asp-route-id="@item.DocumentId" class="button">Delete Document</a>
                     }|
-                    <a asp-action="addComment" asp-route-id="@item.DocumentId">Add Comments</a> |
-                    <a asp-action="viewComment" asp-route-id="@item.DocumentId">View Comments</a> |
-                    <a asp-action="editComment" asp-route-id="@item.DocumentId">Edit Comments</a>
+                    <a asp-action="addComment" asp-route-id="@item.DocumentId" class="button">Add Comments</a> |
+                    <a asp-action="viewComment" asp-route-id="@item.DocumentId" class="button">View Comments</a> |
+                    <a asp-action="editComment" asp-route-id="@item.DocumentId" class="button">Edit Comments</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+    </div>
+<style>
+
+    a.button {
+        background-color: #56baed;
+        color: white;
+        padding: 4px 10px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    }
+</style>
+

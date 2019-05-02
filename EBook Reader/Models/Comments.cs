@@ -11,6 +11,7 @@ namespace EBook_Reader.Models
         public int CommentsId { get; set; }
         public DateTime CommentDate { get; set; }
         public string Comment { get; set; }
+        public string userName { get; set; }
 
         public int? DocumentId { get; set; }
         public Document Document { get; set; }

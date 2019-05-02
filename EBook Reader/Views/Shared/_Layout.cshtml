@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,9 +17,10 @@
 
             <partial name="_LoginPartial" />
             <div style="float:left">
-                
+                @if (SignInManager.IsSignedIn(User))
+                {
                     <a style="float:left;text-decoration:none" class="active" asp-controller="Home" asp-action="HomePage">Home</a>
-                
+                }
                 <a style="float:left;text-decoration:none" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 <a style="float:left;text-decoration:none" asp-area="" asp-controller="Home" asp-action="SiteMap">Site Map</a>
             </div>
@@ -53,6 +58,10 @@
             </script>
         </environment>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!--<script src="~/js/epub.js" asp-append-version="true"></script>-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <!--<script src="epub.js"></script>-->
 
     @RenderSection("Scripts", required: false)
 </body>

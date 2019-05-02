@@ -6,6 +6,7 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\EBook Reader.Views.dll
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\EBook Reader.Views.pdb
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\itextsharp.dll
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csprojAssemblyReference.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csproj.CoreCompileInputs.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.RazorAssemblyInfo.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.RazorAssemblyInfo.cs
@@ -44,4 +45,3 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csproj.CopyComplete
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.dll
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.pdb
-C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csprojAssemblyReference.cache

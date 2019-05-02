@@ -15,7 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FileStorage\" />
+    <Folder Include="Public FileStorage\" />
+    <Folder Include="Private FileStorage\" />
   </ItemGroup>
 
 </Project>

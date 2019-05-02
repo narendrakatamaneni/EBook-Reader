@@ -25,23 +25,27 @@ namespace EBook_Reader.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDocument(List<IFormFile> files)
         {
-            var request = HttpContext.Request;
             HttpClient client = new HttpClient();
-            foreach (var file in request.Form.Files)
+            foreach (var file in files)
             {
                 if (file.Length > 0)
                 {
-                    //HttpClient client = aPIHelper.initial();
+                    byte[] bytes1;
+                        using (var reader = new StreamReader(file.OpenReadStream()))
+                        {
+                            string contentAsString = reader.ReadToEnd();
+                            bytes1 = new byte[contentAsString.Length * sizeof(char)];
+                            System.Buffer.BlockCopy(contentAsString.ToCharArray(), 0, bytes1, 0, bytes1.Length);
+                        }
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                    //var path = Path.Combine(filePath,file.FileName);
-                    byte[] data =System.IO.File.ReadAllBytes(Path.Combine(filePath, file.FileName));
-                    ByteArrayContent bytes = new ByteArrayContent(data);
+                    ByteArrayContent bytes = new ByteArrayContent(bytes1);
                     string fileName = file.FileName;
                     multiContent.Add(bytes, "files", fileName);
                     HttpResponseMessage message = await client.PostAsync("http://localhost:52464/api/files/", multiContent);
                     }
                 }
-            return Ok();
+            //return Ok();
+            return RedirectToAction("/Home/HomePage");
         }
     }
 }

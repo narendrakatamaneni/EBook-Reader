@@ -44,6 +44,12 @@ namespace EBook_Reader.Controllers
 
         public IActionResult HomePage()
         {
+            /*var lects = context_.Comments.Include(l => l.Document);
+            var orderedLects = lects.OrderBy(l => l.Comment)
+              .OrderBy(l => l.Document)
+              .Select(l => l);
+            return View(orderedLects);*/
+
             return View(context_.Documents.ToList<Document>());
         }
 
@@ -62,7 +68,7 @@ namespace EBook_Reader.Controllers
 
         //----< posts back new document details >---------------------
 
-        [HttpPost]
+       /* [HttpPost]
         public  async Task<IActionResult> addDocument()
         {
             //var request = HttpContext.Request;
@@ -98,6 +104,33 @@ namespace EBook_Reader.Controllers
             }
 
 
+            return RedirectToAction("HomePage");
+        }*/
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddDocument(List<IFormFile> files)
+        {
+            HttpClient client = new HttpClient();
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    byte[] bytes1;
+                    using (var reader = new StreamReader(file.OpenReadStream()))
+                    {
+                        string contentAsString = reader.ReadToEnd();
+                        bytes1 = new byte[contentAsString.Length * sizeof(char)];
+                        System.Buffer.BlockCopy(contentAsString.ToCharArray(), 0, bytes1, 0, bytes1.Length);
+                    }
+                    MultipartFormDataContent multiContent = new MultipartFormDataContent();
+                    ByteArrayContent bytes = new ByteArrayContent(bytes1);
+                    string fileName = file.FileName;
+                    multiContent.Add(bytes, "files", fileName);
+                    HttpResponseMessage message = await client.PostAsync("http://localhost:52464/api/files/", multiContent);
+                }
+            }
+            //return Ok();
             return RedirectToAction("HomePage");
         }
 
@@ -226,8 +259,11 @@ namespace EBook_Reader.Controllers
 
         public IActionResult viewComment()
         {
+            var request = HttpContext.Request;
+            string sessionUserName = HttpContext.Session.GetString("SessionUserName");
+
             // fluent API
-            var lects = context_.Comments.Include(l => l.Document);
+            var lects = context_.Comments.Include(l => l.Document).Where(l=>sessionUserName.Equals(l.userName));
             var orderedLects = lects.OrderBy(l => l.Comment)
               .OrderBy(l => l.Document)
               .Select(l => l);
@@ -271,6 +307,9 @@ namespace EBook_Reader.Controllers
         [HttpPost]
         public IActionResult AddComment(int? id, Comments lct)
         {
+            var request = HttpContext.Request;
+            string sessionUserName = HttpContext.Session.GetString("SessionUserName");
+
             if (id == null)
             {
                 return StatusCode(StatusCodes.Status400BadRequest);
@@ -292,6 +331,8 @@ namespace EBook_Reader.Controllers
                     document.Comments = comments;
                 }
                 lct.CommentDate = DateTime.Today;
+                lct.userName = sessionUserName;
+
                 document.Comments.Add(lct);
 
                 try

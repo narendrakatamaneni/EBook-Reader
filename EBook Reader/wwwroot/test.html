@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Test </title>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="epub.js"></script>-->
+    <script src="epub.js"></script>
+</head>
+<body>
+	<div id="area"></div>
+	<script>
+  		//var book = ePub("https://s3.amazonaws.com/moby-dick/OPS/package.opf");
+		var book = ePub("Metamorphosis-jackson.epub");
+  		var rendition = book.renderTo(document.body, {
+        	manager: "continuous",
+			height: 600,
+			width:"60%"
+      	});
+  		rendition.display();
+
+		book.on('book:pageChanged', function(location){
+    		console.log(location.anchorPage, location.pageRange)
+		});
+	</script>
+</body>
+</html>
