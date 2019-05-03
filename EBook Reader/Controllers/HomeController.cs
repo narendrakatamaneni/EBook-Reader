@@ -27,9 +27,16 @@ namespace EBook_Reader.Controllers
         private const string sessionId_ = "SessionId";
         APIHelper aPIHelper = new APIHelper();
 
-        public HomeController(ApplicationDbContext context)
+        private readonly IHostingEnvironment hostingEnvironment_;
+        private string webRootPath = null;
+        private string filePath = null;
+
+        public HomeController(ApplicationDbContext context,IHostingEnvironment hostingEnvironment)
         {
             context_ = context;
+            hostingEnvironment_ = hostingEnvironment;
+            webRootPath = hostingEnvironment_.WebRootPath;
+            filePath = Path.Combine(webRootPath, "FileStorage");
         }
         public IActionResult Index()
         {
@@ -111,6 +118,22 @@ namespace EBook_Reader.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDocument(List<IFormFile> files)
         {
+            //var request = HttpContext.Request;
+            string sessionUserName = HttpContext.Session.GetString("SessionUserName");
+            Document document = new Document();
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    document.DocumentName = file.FileName;
+                    document.userName = sessionUserName;
+                    document.UpdatedDate = DateTime.Today;
+                    document.documentType = Path.GetExtension(file.FileName);
+                }
+            }          
+            context_.Documents.Add(document);
+            context_.SaveChanges();
+
             HttpClient client = new HttpClient();
             foreach (var file in files)
             {
@@ -166,12 +189,31 @@ namespace EBook_Reader.Controllers
         }
 
 
-        public ActionResult viewDocument()
+        public ActionResult viewDocument(int? id)
         {
+            bool found = false;
             DocumentView documentView = new DocumentView();
-            var filePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\wwwroot\FileStorage\";
-                var files = Directory.GetFiles(filePath).ToList<string>();
-                using (PdfReader reader = new PdfReader(files[0]))
+
+            Document document = context_.Documents.Find(id);
+            //var filePath1 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\wwwroot\FileStorage\";
+            var files = Directory.GetFiles(filePath).ToList<string>();
+            foreach (var item in files)
+            {
+                if (Path.GetFileName(item).Equals(document.DocumentName))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (found)
+            {
+                documentView.filePath = Path.Combine("/FileStorage/", document.DocumentName);
+            }
+            else
+            {
+
+            }
+                /*using (PdfReader reader = new PdfReader(files[0]))
                 {
                     StringBuilder text = new StringBuilder();
                     for (int i = 1; i <= reader.NumberOfPages; i++)
@@ -181,7 +223,7 @@ namespace EBook_Reader.Controllers
                     }
                     
                     documentView.textContent = text.ToString();
-                }
+                }*/
             return View(documentView);
         }
          

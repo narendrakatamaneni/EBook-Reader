@@ -9,12 +9,11 @@
 
 </textarea>*@
 
-
 <html>
 <body>
-    <embed src="~/FileStorage/LOR.pdf" style="width:900px;height:600px;float:left" alt="pdf">
+    <embed src=@Model.filePath style="width:900px;height:600px;float:left" alt="pdf">
     <div style="float:right;width:350px;height:900px">
-        <textarea style="width:inherit;height:600px; border:1px solid black;" name="txtArea" asp-for="textContent">
+        <textarea style="width:inherit;height:600px; border:1px solid black;" name="txtArea" asp-for="filePath">
         </textarea>
         <input type="submit" style="width:inherit">
     </div>

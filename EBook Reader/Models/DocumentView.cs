@@ -7,7 +7,7 @@ namespace EBook_Reader.Models
 {
     public class DocumentView
     {
-        public String textContent { get; set;}
+        public String filePath { get; set;}
 
     }
 }

@@ -74,36 +74,80 @@ namespace RestAPI.Controllers
                 }
                 return files;
             }
-            //----< download single file in wwwroot\FileStorage >------
+        //----< download single file in wwwroot\FileStorage >------
 
-            // GET api/<controller>/5
-            [HttpGet("{id}")]
-            public async Task<IActionResult> Download(int id)
+        /*// GET api/<controller>/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Download(int id)
+        {
+            List<string> files = null;
+            string file = "";
+            try
             {
-                List<string> files = null;
-                string file = "";
-                try
+                files = Directory.GetFiles(filePath).ToList<string>();
+                if (0 <= id && id < files.Count)
+                    file = Path.GetFileName(files[id]);
+                else
+                    return NotFound();
+            }
+            catch
+            {
+                return NotFound();
+            }
+            var memory = new MemoryStream();
+            file = files[id];
+            using (var stream = new FileStream(file, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(file), Path.GetFileName(file));
+        }*/
+
+
+        // GET api/<controller>/5
+        [HttpGet("{name}")]
+        public async Task<IActionResult> Download(string name)
+        {
+            List<string> files = null;
+            string file = "";
+            bool found = false;
+            try
+            {
+                files = Directory.GetFiles(filePath).ToList<string>();
+                foreach (var item in files)
                 {
-                    files = Directory.GetFiles(filePath).ToList<string>();
-                    if (0 <= id && id < files.Count)
-                        file = Path.GetFileName(files[id]);
-                    else
-                        return NotFound();
+                    if (Path.GetFileName(item).Equals(name))
+                    {
+                        file = item;
+                        found = true;
+                    }
                 }
-                catch
+
+                if (found)
+                {
+                    var memory = new MemoryStream();
+                    //file = files[id];
+                    using (var stream = new FileStream(file, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memory);
+                    }
+                    memory.Position = 0;
+                    return File(memory, GetContentType(file), Path.GetFileName(file));
+                }
+                else
                 {
                     return NotFound();
                 }
-                var memory = new MemoryStream();
-                file = files[id];
-                using (var stream = new FileStream(file, FileMode.Open))
-                {
-                    await stream.CopyToAsync(memory);
-                }
-                memory.Position = 0;
-                return File(memory, GetContentType(file), Path.GetFileName(file));
             }
-            private string GetContentType(string path)
+            catch
+            {
+                return NotFound();
+            }
+           
+        }
+
+        private string GetContentType(string path)
             {
                 var types = GetMimeTypes();
                 var ext = Path.GetExtension(path).ToLowerInvariant();
