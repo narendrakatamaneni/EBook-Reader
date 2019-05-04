@@ -6,7 +6,6 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\EBook Reader.Views.dll
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\EBook Reader.Views.pdb
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\bin\Debug\netcoreapp2.2\itextsharp.dll
-C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csprojAssemblyReference.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csproj.CoreCompileInputs.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.RazorAssemblyInfo.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.RazorAssemblyInfo.cs
@@ -30,8 +29,16 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\HomePage.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\publicArea.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\siteMap.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\viewComment.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Home\viewDocument.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Public\AddPublicComment.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Public\addPublicDocument.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Public\editPublicComment.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Public\PublicHomePage.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Public\viewPublicComment.g.cshtml.cs
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Public\viewPublicDocument.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -45,3 +52,4 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\De
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csproj.CopyComplete
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.dll
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\EBook Reader\obj\Debug\netcoreapp2.2\EBook Reader.csprojAssemblyReference.cache

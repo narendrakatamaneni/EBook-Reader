@@ -18,6 +18,7 @@ using System.Text;
 using EBook_Reader.Helpher;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 
 namespace EBook_Reader.Controllers
 {
@@ -38,6 +39,8 @@ namespace EBook_Reader.Controllers
             webRootPath = hostingEnvironment_.WebRootPath;
             filePath = Path.Combine(webRootPath, "FileStorage");
         }
+        [Authorize]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
             //return View(context_.Documents.ToList<Document>());
@@ -48,15 +51,8 @@ namespace EBook_Reader.Controllers
         //{
         //    return RedirectToPage("/Areas/Identity/Pages/Account/Login.cshtml");
         //}
-
         public IActionResult HomePage()
         {
-            /*var lects = context_.Comments.Include(l => l.Document);
-            var orderedLects = lects.OrderBy(l => l.Comment)
-              .OrderBy(l => l.Document)
-              .Select(l => l);
-            return View(orderedLects);*/
-
             return View(context_.Documents.ToList<Document>());
         }
 
@@ -64,55 +60,63 @@ namespace EBook_Reader.Controllers
         {
             return View();
         }
+
+        public IActionResult siteMap()
+        {
+            return View();
+        }
+
         //----< displays form for Adding a new document >----------------
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public IActionResult addDocument(int id)
         {
             var model = new Document();
             return View(model);
         }
 
+     
+
+
         //----< posts back new document details >---------------------
 
-       /* [HttpPost]
-        public  async Task<IActionResult> addDocument()
-        {
-            //var request = HttpContext.Request;
-            //string sessionUserName = HttpContext.Session.GetString("SessionUserName");
-            //foreach (var file in request.Form.Files)
-            //{
-            //    if (file.Length > 0)
-            //    {
-            //        crs.DocumentName = file.FileName;
-            //        crs.userName = sessionUserName;
-            //        crs.UpdatedDate = DateTime.Today;
-            //    }
-            //}          
-            //context_.Documents.Add(crs);
+        /* [HttpPost]
+         public  async Task<IActionResult> addDocument()
+         {
+             //var request = HttpContext.Request;
+             //string sessionUserName = HttpContext.Session.GetString("SessionUserName");
+             //foreach (var file in request.Form.Files)
+             //{
+             //    if (file.Length > 0)
+             //    {
+             //        crs.DocumentName = file.FileName;
+             //        crs.userName = sessionUserName;
+             //        crs.UpdatedDate = DateTime.Today;
+             //    }
+             //}          
+             //context_.Documents.Add(crs);
 
-            //context_.SaveChanges();
-            HttpClient client = new HttpClient();
+             //context_.SaveChanges();
+             HttpClient client = new HttpClient();
 
-            //HttpClient client = aPIHelper.initial();
-            MultipartFormDataContent multiContent = new MultipartFormDataContent();
+             //HttpClient client = aPIHelper.initial();
+             MultipartFormDataContent multiContent = new MultipartFormDataContent();
 
-            var request = HttpContext.Request;
-            foreach (var file in request.Form.Files)
-            {
-                if (file.Length > 0)
-                {
-                    byte[] data = System.IO.File.ReadAllBytes(file.FileName);
-                    ByteArrayContent bytes = new ByteArrayContent(data);
-                    string fileName = Path.GetFileName(file.ToString());
-                    multiContent.Add(bytes, "files", fileName);
-                   HttpResponseMessage message= await client.PostAsync("http://localhost:52464/", multiContent);
-                }
-            }
+             var request = HttpContext.Request;
+             foreach (var file in request.Form.Files)
+             {
+                 if (file.Length > 0)
+                 {
+                     byte[] data = System.IO.File.ReadAllBytes(file.FileName);
+                     ByteArrayContent bytes = new ByteArrayContent(data);
+                     string fileName = Path.GetFileName(file.ToString());
+                     multiContent.Add(bytes, "files", fileName);
+                    HttpResponseMessage message= await client.PostAsync("http://localhost:52464/", multiContent);
+                 }
+             }
 
 
-            return RedirectToAction("HomePage");
-        }*/
+             return RedirectToAction("HomePage");
+         }*/
 
 
         [HttpPost]
@@ -159,7 +163,6 @@ namespace EBook_Reader.Controllers
 
 
         //----< shows details for each document >----------------------
-
         public ActionResult documentDetails(int? id)
         {
             if (id == null)
@@ -188,14 +191,14 @@ namespace EBook_Reader.Controllers
             return View(document);
         }
 
-
-        public ActionResult viewDocument(int? id)
+        public async Task<IActionResult> viewDocument(int? id)
         {
             bool found = false;
             DocumentView documentView = new DocumentView();
+            HttpClient client = new HttpClient();
 
             Document document = context_.Documents.Find(id);
-            //var filePath1 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\wwwroot\FileStorage\";
+            var filePath1 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"..\..\..\..\wwwroot\FileStorage\";
             var files = Directory.GetFiles(filePath).ToList<string>();
             foreach (var item in files)
             {
@@ -211,19 +214,30 @@ namespace EBook_Reader.Controllers
             }
             else
             {
-
-            }
-                /*using (PdfReader reader = new PdfReader(files[0]))
+                using (var result = await client.GetAsync("http://localhost:52464/api/files" + "/" + document.DocumentName))
                 {
-                    StringBuilder text = new StringBuilder();
-                    for (int i = 1; i <= reader.NumberOfPages; i++)
+                    if (result.IsSuccessStatusCode)
                     {
-                        text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
-
+                        byte[] bytes= await result.Content.ReadAsByteArrayAsync();
+                       // System.IO.File.WriteAllBytes(filePath, bytes);
+                        var path = Path.Combine(filePath, document.DocumentName);
+                        /*using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            //await System.IO.File.CopyToAsync(fileStream);
+                            fileStream.Write(bytes, 0, bytes.Length);
+                            fileStream.Flush();
+                            fileStream.Close();
+                            
+                        }*/
+                        FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
+                        //File(bytes, "application/pdf");
+                        fs.Write(bytes, 0, bytes.Length);
+                        fs.Close();
                     }
-                    
-                    documentView.textContent = text.ToString();
-                }*/
+
+                }
+                documentView.filePath = Path.Combine("/FileStorage/", document.DocumentName);
+            }
             return View(documentView);
         }
          
@@ -298,7 +312,6 @@ namespace EBook_Reader.Controllers
         }
 
         //----< show list of lectures, ordered by Title >------------
-
         public IActionResult viewComment()
         {
             var request = HttpContext.Request;
@@ -310,17 +323,6 @@ namespace EBook_Reader.Controllers
               .OrderBy(l => l.Document)
               .Select(l => l);
             return View(orderedLects);
-
-            // Linq
-            //var lects = context_.Lectures.Include(l => l.Course);
-            //var orderedLects = from l in lects
-            //                   orderby l.Title
-            //                   orderby l.Course
-            //                   select l;
-            //return View(orderedLects);
-
-            // doesn't return Lecture's course nor order by title
-            //return View(context_.Lectures.ToList<Lecture>());
         }
 
         //----< shows form for creating a lecture >------------------
@@ -396,7 +398,6 @@ namespace EBook_Reader.Controllers
          *   simply redirects back to the Index view, which 
          *   will not show the deleted comment.
          */
-
         public IActionResult deleteComment(int? id)
         {
             if (id == null)
@@ -464,13 +465,13 @@ namespace EBook_Reader.Controllers
             }
             return RedirectToAction("HomePage");
         }
+ 
         public IActionResult Logout()
         {
             HttpContext.Session.SetString("SessionUserName", null);
             //return View(context_.Documents.ToList<Document>());
             return RedirectToAction("Index");
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

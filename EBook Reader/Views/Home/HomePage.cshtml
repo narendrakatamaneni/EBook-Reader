@@ -10,9 +10,10 @@
 
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        <a asp-action="addDocument" value="Add Book" class="button">Add Book</a>
-    </p>
+<p>
+    <a asp-action="addDocument" value="Add Book" class="button">Add Private Book</a>
+    <a asp-action="addPublicDocument" asp-controller="Public" value="Add Public Book" class="button">Add Public Book</a>
+</p>
 }
 
     <div style="margin:30px 480px">
@@ -20,7 +21,7 @@
     </div>
 <div style="margin:40px 70px">
 <!--<a href="~/test.html">test</a>-->
-<table class="table">
+<table class="table" cellspacing="13">
     <thead>
         <tr>
             @*<th>
@@ -44,8 +45,8 @@
                         @Html.DisplayFor(modelItem => item.UpdatedDate)
                     </td>*@
                 <td>
-                    <a asp-action="editDocument" asp-route-id="@item.DocumentId" class="button">Edit Document</a> |
-                    <a asp-action="viewDocument" asp-route-id="@item.DocumentId" class="button">Document Details</a> |
+                   <!-- <a asp-action="editDocument" asp-route-id="@item.DocumentId" class="button">Edit Document</a> |-->
+                    <a asp-action="viewDocument" asp-route-id="@item.DocumentId" class="button">View Document</a> |
                     @if (User.IsInRole("Admin"))
                     {
                         <a asp-action="deleteDocument" asp-route-id="@item.DocumentId" class="button">Delete Document</a>

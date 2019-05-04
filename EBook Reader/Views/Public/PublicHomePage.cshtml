@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EBook_Reader.Models.PublicDocument>
+
+@{
+    ViewData["Title"] = "PublicHomePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>PublicHomePage</h1>
+
+<div style="margin:30px 480px">
+    <h1>Books Available</h1>
+</div>
+<div style="margin:40px 70px">
+    <!--<a href="~/test.html">test</a>-->
+    <table class="table" cellspacing="13">
+        <thead>
+            <tr>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.DocumentName)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.UpdatedDate)
+                    </th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="font-family:Calibri">
+                        @Html.DisplayFor(modelItem => item.DocumentName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.UpdatedDate)
+                        </td>*@
+                    <td>
+                        <!-- <a asp-action="editDocument" asp-route-id="@item.PublicDocumentId" class="button">Edit Document</a> |-->
+                        <a asp-action="viewPublicDocument" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">View Document</a> |
+                        <a asp-action="addPublicComment" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">Add Comments</a> |
+                        <a asp-action="viewPublicComment"  asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">View Comments</a> |
+                        <a asp-action="editPublicComment" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">Edit Comments</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<style>
+
+    a.button {
+        background-color: #56baed;
+        color: white;
+        padding: 4px 10px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    }
+</style>

@@ -11,20 +11,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="AddDocument" asp-controller="Home" method="post" enctype="multipart/form-data">
-            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="DocumentName" class="control-label"></label>
-                    <input asp-for="DocumentName" class="form-control" />
-                    <span asp-validation-for="DocumentName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="UpdatedDate" class="control-label"></label>
-                    <input asp-for="UpdatedDate" class="form-control" />
-                    <span asp-validation-for="UpdatedDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Add" class="btn btn-primary" />
-                </div>*@
+           
             <div class="form-group">
                 <div class="col-md-10">
                     <p>Upload one or more files using this form:</p>
@@ -41,7 +28,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="HomePage">Back to List</a>
 </div>
 
 @section Scripts {

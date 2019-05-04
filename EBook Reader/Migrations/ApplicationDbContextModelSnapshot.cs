@@ -59,6 +59,46 @@ namespace EBook_Reader.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("EBook_Reader.Models.PublicComments", b =>
+                {
+                    b.Property<int>("PublicCommentsId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime>("CommentDate");
+
+                    b.Property<int?>("PublicDocumentId");
+
+                    b.Property<string>("userName");
+
+                    b.HasKey("PublicCommentsId");
+
+                    b.HasIndex("PublicDocumentId");
+
+                    b.ToTable("PublicComments");
+                });
+
+            modelBuilder.Entity("EBook_Reader.Models.PublicDocument", b =>
+                {
+                    b.Property<int>("PublicDocumentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DocumentName");
+
+                    b.Property<DateTime>("UpdatedDate");
+
+                    b.Property<string>("documentType");
+
+                    b.Property<string>("userName");
+
+                    b.HasKey("PublicDocumentId");
+
+                    b.ToTable("PublicDocuments");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -225,6 +265,13 @@ namespace EBook_Reader.Migrations
                     b.HasOne("EBook_Reader.Models.Document", "Document")
                         .WithMany("Comments")
                         .HasForeignKey("DocumentId");
+                });
+
+            modelBuilder.Entity("EBook_Reader.Models.PublicComments", b =>
+                {
+                    b.HasOne("EBook_Reader.Models.PublicDocument", "PublicDocument")
+                        .WithMany("PublicComments")
+                        .HasForeignKey("PublicDocumentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

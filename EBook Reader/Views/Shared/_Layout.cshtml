@@ -22,7 +22,12 @@
                     <a style="float:left;text-decoration:none" class="active" asp-controller="Home" asp-action="HomePage">Home</a>
                 }
                 <a style="float:left;text-decoration:none" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                <a style="float:left;text-decoration:none" asp-area="" asp-controller="Home" asp-action="SiteMap">Site Map</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a style="float:left;text-decoration:none" asp-area="" asp-controller="Home" asp-action="siteMap">Site Map</a>
+                }
+                <a style="float:left;text-decoration:none" asp-area="" asp-controller="Public" asp-action="PublicHomePage">Public Area</a>
+
             </div>
         </nav>
     </header>

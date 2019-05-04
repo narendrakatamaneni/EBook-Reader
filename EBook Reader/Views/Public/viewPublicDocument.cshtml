@@ -1,0 +1,16 @@
+﻿@model EBook_Reader.Models.DocumentView
+@{
+    ViewData["Title"] = "viewPublicDocument";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<textarea style="width:714px;height:500px;border:1px solid black;margin-left:250px" name="txtArea" asp-for="textContent">
+
+    </textarea>*@
+
+<html>
+<body>
+    <embed src=@Model.filePath style="width:900px;height:600px;float:left" alt="pdf" type="application/pdf">
+</body>
+
+</html>
