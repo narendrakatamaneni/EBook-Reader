@@ -221,19 +221,23 @@ namespace EBook_Reader.Controllers
             }
             try
             {
-                /*var comment = context_.PublicComments.Include(l => l.PublicDocument).Where(l => l.PublicDocumentId.Equals(id));
-                if (comment != null)
+                if (id != null)
                 {
-                    context_.Remove(comment);
-                    context_.SaveChanges();
-                }*/
-
+                    var comments = context_.PublicComments.Where(s => (id == s.PublicDocumentId));
+                    if (comments != null)
+                    {
+                        foreach (var comment in comments)
+                        {
+                            context_.Remove(comment);
+                        }
+                    }
+                }
                 var document = context_.PublicDocuments.Find(id);
-                /*if (document != null)
+                if (document != null)
                 {
                     context_.Remove(document);
                     context_.SaveChanges();
-                }*/
+                }
                 using (var result = await client.DeleteAsync("http://localhost:52464/api/files/publicdocumentdelete" + "/" + document.DocumentName))
                 {
                     if (result.IsSuccessStatusCode)

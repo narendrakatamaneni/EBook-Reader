@@ -146,16 +146,7 @@ namespace EBook_Reader.Controllers
             {
                 if (file.Length > 0)
                 {
-                    /*byte[] bytes1;
-                    using (var reader = new StreamReader(file.OpenReadStream()))
-                    {
-                        string contentAsString = System.IO.File.ReadAllBytes();
-                        bytes1 = new byte[contentAsString.Length *sizeof(char)];
-                        System.Buffer.BlockCopy(contentAsString.ToCharArray(), 0, bytes1, 0, bytes1.Length);
-                    }
-                    MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                   ByteArrayContent bytes = new ByteArrayContent(bytes1);*/
-
+                 
                     byte[] data;
                     using (var br = new BinaryReader(file.OpenReadStream()))
                         data = br.ReadBytes((int)file.OpenReadStream().Length);
@@ -229,18 +220,10 @@ namespace EBook_Reader.Controllers
                     if (result.IsSuccessStatusCode)
                     {
                         byte[] bytes= await result.Content.ReadAsByteArrayAsync();
-                       // System.IO.File.WriteAllBytes(filePath, bytes);
+                       
                         var path = Path.Combine(filePath, document.DocumentName);
-                        /*using (var fileStream = new FileStream(path, FileMode.Create))
-                        {
-                            //await System.IO.File.CopyToAsync(fileStream);
-                            fileStream.Write(bytes, 0, bytes.Length);
-                            fileStream.Flush();
-                            fileStream.Close();
-                            
-                        }*/
                         FileStream fs = new FileStream(path, FileMode.OpenOrCreate);
-                        //File(bytes, "application/pdf");
+                        
                         fs.Write(bytes, 0, bytes.Length);
                         fs.Close();
                     }
@@ -309,6 +292,18 @@ namespace EBook_Reader.Controllers
             }
             try
             {
+                if(id != null)
+                {
+                    var comments = context_.Comments.Where(s => (id==s.DocumentId));
+                    if (comments != null)
+                    {
+                        foreach (var comment in comments)
+                        {
+                            context_.Remove(comment);
+                        }
+                    }
+                }
+
                 document = context_.Documents.Find(id);
                 if (document != null)
                 {

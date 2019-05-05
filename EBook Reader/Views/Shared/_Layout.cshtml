@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EBook_Reader</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/scale.css" asp-append-version="true"/>
 </head>
 <body>
     <header>
@@ -27,7 +28,7 @@
                     <a style="float:left;text-decoration:none" asp-area="" asp-controller="Home" asp-action="siteMap">Site Map</a>
                 }
                 <a style="float:left;text-decoration:none" asp-area="" asp-controller="Public" asp-action="PublicHomePage">Public Area</a>
-                <a style="float:left;text-decoration:none" href="~/pages/About.html" >About</a>
+                <a style="float:left;text-decoration:none" href="~/pages/test124.html" >About</a>
 
             </div>
         </nav>
@@ -64,9 +65,11 @@
             </script>
         </environment>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     <!--<script src="~/js/epub.js" asp-append-version="true"></script>-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="~/js/scale.js"></script>
     <!--<script src="epub.js"></script>-->
 
     @RenderSection("Scripts", required: false)

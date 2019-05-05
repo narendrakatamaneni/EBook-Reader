@@ -9,8 +9,17 @@
     </textarea>*@
 
 <html>
+<head>
+</head>
 <body>
-    <embed src=@Model.filePath style="width:900px;height:600px;float:left" alt="pdf" type="application/pdf">
+    <iframe id="embed" src=@Model.filePath style="width:700px;height:600px;float:left;margin:49px 186px" alt="pdf" type="application/pdf" ></iframe>
+    <div style="float:right;margin:-642px 95px">
+        <sizerbutton-container>
+            <sizer-button onclick="biggerImage('embed')">+</sizer-button>
+            <sizer-button onclick="smallerImage('embed')">-</sizer-button>
+        </sizerbutton-container>
+    </div>
+
 </body>
 
 </html>
