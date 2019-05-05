@@ -1,0 +1,62 @@
+﻿body {
+    padding: 40px 18px;
+    font-family: Tahoma;
+}
+
+.content {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    max-height:100px;
+}
+
+.display-container {
+    float:left;
+    display:flex;
+
+}
+.black, hover-black:hover {
+    color: #fff !important;
+    background-color: #000 !important;
+}
+.display-left {
+    position: fixed;
+    top: 48%;
+    left: 0%;
+    transform: translate(0%,50%);
+}
+.display-right {
+    position: fixed;
+    top: 48%;
+    right: 46%;
+    transform: translate(0%,50%);
+}
+.mySlides {
+    display: none;
+}
+
+.button {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    border-radius:50%;
+    position:fixed;
+}
+.frame-area {
+    display: block;
+    width: 100%; 
+    max-width: 400px;
+    height: 300px;
+    overflow: auto;
+    border: #999999 1px solid;
+    margin: 0px;
+    padding: 0px;
+}

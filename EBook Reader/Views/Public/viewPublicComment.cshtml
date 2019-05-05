@@ -4,12 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>viewPublicComment</h1>
-
 <h1>Comments</h1>
 
 <p>
-    <a asp-action="addComment">Add New Comment</a>
+    <a asp-action="addComment" class="button">Add New Comment</a>
 </p>
 <div style="margin:40px 70px">
     <table class="table" cellspacing="13">
@@ -44,8 +42,8 @@
                     {
                         <td style="padding: 0.1em;">
 
-                            <a asp-action="editPublicComment" asp-route-id="@item.PublicCommentsId">Edit Comment</a> |
-                            <a asp-action="deletePublicComment" asp-route-id="@item.PublicCommentsId">Delete Comment</a>
+                            <a asp-action="editPublicComment" asp-route-id="@item.PublicCommentsId" class="button">Edit Comment</a> |
+                            <a asp-action="deletePublicComment" asp-route-id="@item.PublicCommentsId"class="button" >Delete Comment</a>
 
                         </td>
                     }
@@ -53,8 +51,23 @@
             }
         </tbody>
     </table>
-    </div>
-    <div>
-        <a asp-action="PublicHomePage">Back to Document List</a>
-    </div>
+</div>
+<div>
+    <a asp-action="PublicHomePage" class="button">Back to Document List</a>
+</div>
+<style>
+
+    a.button {
+        background-color: #56baed;
+        color: white;
+        padding: 4px 10px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    }
+</style>
+
 

@@ -224,13 +224,20 @@ namespace EBook_Reader.Controllers
             }
             try
             {
+                /*var comment = context_.PublicComments.Include(l => l.PublicDocument).Where(l => l.PublicDocumentId.Equals(id));
+                if (comment != null)
+                {
+                    context_.Remove(comment);
+                    context_.SaveChanges();
+                }*/
+
                 var document = context_.PublicDocuments.Find(id);
-                if (document != null)
+                /*if (document != null)
                 {
                     context_.Remove(document);
                     context_.SaveChanges();
-                }
-                using (var result = await client.DeleteAsync("http://localhost:52464/api/files/DeletePublicDocument" + "/" + document.DocumentName))
+                }*/
+                using (var result = await client.DeleteAsync("http://localhost:52464/api/files/publicdocumentdelete" + "/" + document.DocumentName))
                 {
                     if (result.IsSuccessStatusCode)
                     {
@@ -247,7 +254,7 @@ namespace EBook_Reader.Controllers
         }
 
         //----< show list of lectures, ordered by Title >------------
-        public IActionResult viewPublicComment()
+        public IActionResult viewPublicComment(int id)
         {
             var request = HttpContext.Request;
             string sessionUserName = HttpContext.Session.GetString("SessionUserName");

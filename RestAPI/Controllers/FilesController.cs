@@ -185,18 +185,18 @@ namespace RestAPI.Controllers
                 Console.WriteLine(ioExp.Message);
             }
         }
-        [Route("[action]")]
-        [HttpDelete("{name}")]
-        public void DeletePublicDocument(string name)
+        [Route("[action]/{name}")]
+        [HttpDelete]
+        public void publicdocumentdelete(string name)
         {
-            string filePath = Path.Combine(webRootPath, "Public FileStorage");
+            string filePath1 = Path.Combine(webRootPath, "Public FileStorage");
             try
             {
                 // Check if file exists with its full path    
-                if (System.IO.File.Exists(Path.Combine(filePath, name)))
+                if (System.IO.File.Exists(Path.Combine(filePath1, name)))
                 {
                     // If file found, delete it    
-                    System.IO.File.Delete(Path.Combine(filePath, name));
+                    System.IO.File.Delete(Path.Combine(filePath1, name));
                 }
                 else
                 {
