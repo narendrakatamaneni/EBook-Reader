@@ -70,15 +70,12 @@ namespace EBook_Reader.Controllers
             {
                 if (file.Length > 0)
                 {
-                    byte[] bytes1;
-                    using (var reader = new StreamReader(file.OpenReadStream()))
-                    {
-                        string contentAsString = reader.ReadToEnd();
-                        bytes1 = new byte[contentAsString.Length * sizeof(char)];
-                        System.Buffer.BlockCopy(contentAsString.ToCharArray(), 0, bytes1, 0, bytes1.Length);
-                    }
+                    byte[] data;
+                    using (var br = new BinaryReader(file.OpenReadStream()))
+                        data = br.ReadBytes((int)file.OpenReadStream().Length);
+
+                    ByteArrayContent bytes = new ByteArrayContent(data);
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                    ByteArrayContent bytes = new ByteArrayContent(bytes1);
                     string fileName = file.FileName;
                     multiContent.Add(bytes, "files", fileName);
                     HttpResponseMessage message = await client.PostAsync("http://localhost:52464/api/files/publicdocument", multiContent);
@@ -140,7 +137,7 @@ namespace EBook_Reader.Controllers
             }
             else
             {
-                using (var result = await client.GetAsync("http://localhost:52464/api/files/publicdocument" + "/" + document.DocumentName))
+                using (var result = await client.GetAsync("http://localhost:52464/api/files/getpublicdocument" + "/" + document.DocumentName))
                 {
                     if (result.IsSuccessStatusCode)
                     {

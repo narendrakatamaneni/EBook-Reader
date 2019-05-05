@@ -85,6 +85,56 @@ namespace RestAPI.Controllers
 
         }
 
+        [Route("[action]/{name}")]
+        [HttpGet]
+        public async Task<IActionResult> getpublicdocument(string name)
+        {
+            List<string> files = null;
+            string file = "";
+            bool found = false;
+           string filePath1= Path.Combine(webRootPath, "Public FileStorage");
+            try
+            {
+                files = Directory.GetFiles(filePath1).ToList<string>();
+                foreach (var item in files)
+                {
+                    if (Path.GetFileName(item).Equals(name))
+                    {
+                        file = item;
+                        found = true;
+                    }
+                }
+
+                if (found)
+                {
+                    var memory = new MemoryStream();
+                    //file = files[id];
+                    using (var stream = new FileStream(file, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memory);
+                    }
+                    memory.Position = 0;
+                    return File(memory, GetContentType(file), Path.GetFileName(file));
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                return NotFound();
+            }
+
+        }
+
+
+
+
+
+
+
+
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();
@@ -125,8 +175,10 @@ namespace RestAPI.Controllers
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await file.CopyToAsync(fileStream);
+                            fileStream.Close();
                         }
                     }
+             
                 }
             }
             return Ok();
@@ -147,6 +199,8 @@ namespace RestAPI.Controllers
                     using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(fileStream);
+                        fileStream.Close();
+   
                     }
                 }
             }

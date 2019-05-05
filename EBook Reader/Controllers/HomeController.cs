@@ -146,15 +146,22 @@ namespace EBook_Reader.Controllers
             {
                 if (file.Length > 0)
                 {
-                    byte[] bytes1;
+                    /*byte[] bytes1;
                     using (var reader = new StreamReader(file.OpenReadStream()))
                     {
-                        string contentAsString = reader.ReadToEnd();
-                        bytes1 = new byte[contentAsString.Length * sizeof(char)];
+                        string contentAsString = System.IO.File.ReadAllBytes();
+                        bytes1 = new byte[contentAsString.Length *sizeof(char)];
                         System.Buffer.BlockCopy(contentAsString.ToCharArray(), 0, bytes1, 0, bytes1.Length);
                     }
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
-                    ByteArrayContent bytes = new ByteArrayContent(bytes1);
+                   ByteArrayContent bytes = new ByteArrayContent(bytes1);*/
+
+                    byte[] data;
+                    using (var br = new BinaryReader(file.OpenReadStream()))
+                        data = br.ReadBytes((int)file.OpenReadStream().Length);
+
+                    ByteArrayContent bytes = new ByteArrayContent(data);
+                    MultipartFormDataContent multiContent = new MultipartFormDataContent();
                     string fileName = file.FileName;
                     multiContent.Add(bytes, "files", fileName);
                     HttpResponseMessage message = await client.PostAsync("http://localhost:52464/api/files/", multiContent);
