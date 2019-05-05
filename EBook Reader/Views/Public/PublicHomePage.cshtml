@@ -39,9 +39,13 @@
                         <!-- <a asp-action="editDocument" asp-route-id="@item.PublicDocumentId" class="button">Edit Document</a> |-->
                         <a asp-action="viewPublicDocument" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">View Document</a> |
                         <a asp-action="addPublicComment" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">Add Comments</a> |
-                        <a asp-action="viewPublicComment"  asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">View Comments</a> |
-                        <a asp-action="editPublicComment" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">Edit Comments</a>
-                    </td>
+                        <a asp-action="viewPublicComment" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">View Comments</a> |
+                        <a asp-action="editPublicComment" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">Edit Comments</a>|
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="deletePublicDocument" asp-controller="Public" asp-route-id="@item.PublicDocumentId" class="button">Delete Document</a>
+                        }
+                        </td>
                 </tr>
             }
         </tbody>

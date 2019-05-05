@@ -11,3 +11,4 @@ C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\RestAPI\obj\Debug\n
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\RestAPI\obj\Debug\netcoreapp2.2\RestAPI.RazorTargetAssemblyInfo.cache
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\RestAPI\obj\Debug\netcoreapp2.2\RestAPI.dll
 C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\RestAPI\obj\Debug\netcoreapp2.2\RestAPI.pdb
+C:\Users\NARENDRA\Desktop\Internet Programming\Final Project\RestAPI\obj\Debug\netcoreapp2.2\RestAPI.csprojAssemblyReference.cache

@@ -140,7 +140,7 @@ namespace EBook_Reader.Controllers
             }
             else
             {
-                using (var result = await client.GetAsync("http://localhost:52464/api/files" + "/" + document.DocumentName))
+                using (var result = await client.GetAsync("http://localhost:52464/api/files/publicdocument" + "/" + document.DocumentName))
                 {
                     if (result.IsSuccessStatusCode)
                     {
@@ -215,8 +215,9 @@ namespace EBook_Reader.Controllers
          * - note that Delete does not send back a view, but
          *   simply redirects back to the Index view.
          */
-        public IActionResult deletePublicDocument(int? id)
+        public async Task<IActionResult> deletePublicDocument(int? id)
         {
+            HttpClient client = new HttpClient();
             if (id == null)
             {
                 return StatusCode(StatusCodes.Status400BadRequest);
@@ -228,6 +229,14 @@ namespace EBook_Reader.Controllers
                 {
                     context_.Remove(document);
                     context_.SaveChanges();
+                }
+                using (var result = await client.DeleteAsync("http://localhost:52464/api/files/DeletePublicDocument" + "/" + document.DocumentName))
+                {
+                    if (result.IsSuccessStatusCode)
+                    {
+
+                    }
+
                 }
             }
             catch (Exception)

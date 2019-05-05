@@ -8,53 +8,67 @@
 <h1>Comments</h1>
 
 <p>
-    <a asp-action="addComment">Add New Comment</a>
+    <a asp-action="addComment" class="button">Add New Comment</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CommentDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Document)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td style="padding: 0.1em;">
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td style="padding: 0.1em;">
-                @Html.DisplayFor(modelItem => item.CommentDate)
-            </td>
-            <td style="padding: 0.1em;">
-                @Html.DisplayFor(modelItem => item.Document.DocumentName)
-            </td>
-            @if (User.IsInRole("Admin"))
-            {
-                <td style="padding: 0.1em;">
-
-                    <a asp-action="editComment" asp-route-id="@item.CommentsId">Edit Comment</a> |
-                    <a asp-action="deleteComment" asp-route-id="@item.CommentsId">Delete Comment</a>
-                   
-                </td>
-            }
+<div style="margin:40px 70px">
+    <table class="table" cellspacing="13">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CommentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Document)
+                </th>
+                <th></th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="padding: 0.1em;">
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td style="padding: 0.1em;">
+                        @Html.DisplayFor(modelItem => item.CommentDate)
+                    </td>
+                    <td style="padding: 0.1em;">
+                        @Html.DisplayFor(modelItem => item.Document.DocumentName)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td style="padding: 0.1em;">
+
+                            <a asp-action="editComment" asp-route-id="@item.CommentsId" class="button">Edit Comment</a> |
+                            <a asp-action="deleteComment" asp-route-id="@item.CommentsId" class="button">Delete Comment</a>
+
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+    <div>
+        <a asp-action="HomePage" class="button">Back to Document List</a>
+    </div>
+
+    <style>
+
+        a.button {
+            background-color: #56baed;
+            color: white;
+            padding: 4px 10px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+            box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
         }
-    </tbody>
-</table>
-
-<div>
-    <a asp-action="HomePage">Back to Document List</a>
-</div>
-
-
+    </style>
 
