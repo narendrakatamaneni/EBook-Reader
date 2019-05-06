@@ -128,13 +128,6 @@ namespace RestAPI.Controllers
 
         }
 
-
-
-
-
-
-
-
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();

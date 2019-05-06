@@ -244,6 +244,20 @@ namespace EBook_Reader.Controllers
                     {
 
                     }
+                    String[] lstFiles = Directory.GetFiles(filePath);
+                    for (int i = 0; i < lstFiles.Length; i++)
+                    {
+                        string fileName = Path.GetFileName(lstFiles[i]);
+                        if (fileName.Equals(document.DocumentName))
+                        {
+                            if (System.IO.File.Exists(Path.Combine(filePath, document.DocumentName)))
+                            {
+                                // If file found, delete it    
+                                System.IO.File.Delete(Path.Combine(filePath, document.DocumentName));
+                            }
+                        }
+
+                    }
 
                 }
             }
@@ -261,7 +275,7 @@ namespace EBook_Reader.Controllers
             string sessionUserName = HttpContext.Session.GetString("SessionUserName");
 
             // fluent API
-            var lects = context_.PublicComments.Include(l => l.PublicDocument).Where(l => sessionUserName.Equals(l.userName));
+            var lects = context_.PublicComments.Include(l => l.PublicDocument).Where(l => (sessionUserName.Equals(l.userName)&& id == l.PublicDocumentId));
             var orderedLects = lects.OrderBy(l => l.Comment)
               .OrderBy(l => l.PublicDocument)
               .Select(l => l);

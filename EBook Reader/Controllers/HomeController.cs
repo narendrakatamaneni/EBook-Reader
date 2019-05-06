@@ -55,7 +55,11 @@ namespace EBook_Reader.Controllers
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult HomePage()
         {
-            return View(context_.Documents.ToList<Document>());
+            string sessionUserName = HttpContext.Session.GetString("SessionUserName");
+            var books = context_.Documents.ToList<Document>().Where(l => (sessionUserName.Equals(l.userName)));
+
+            //return View(context_.Documents.ToList<Document>());
+            return View(books);
         }
 
         public IActionResult Privacy()
@@ -76,50 +80,6 @@ namespace EBook_Reader.Controllers
             var model = new Document();
             return View(model);
         }
-
-     
-
-
-        //----< posts back new document details >---------------------
-
-        /* [HttpPost]
-         public  async Task<IActionResult> addDocument()
-         {
-             //var request = HttpContext.Request;
-             //string sessionUserName = HttpContext.Session.GetString("SessionUserName");
-             //foreach (var file in request.Form.Files)
-             //{
-             //    if (file.Length > 0)
-             //    {
-             //        crs.DocumentName = file.FileName;
-             //        crs.userName = sessionUserName;
-             //        crs.UpdatedDate = DateTime.Today;
-             //    }
-             //}          
-             //context_.Documents.Add(crs);
-
-             //context_.SaveChanges();
-             HttpClient client = new HttpClient();
-
-             //HttpClient client = aPIHelper.initial();
-             MultipartFormDataContent multiContent = new MultipartFormDataContent();
-
-             var request = HttpContext.Request;
-             foreach (var file in request.Form.Files)
-             {
-                 if (file.Length > 0)
-                 {
-                     byte[] data = System.IO.File.ReadAllBytes(file.FileName);
-                     ByteArrayContent bytes = new ByteArrayContent(data);
-                     string fileName = Path.GetFileName(file.ToString());
-                     multiContent.Add(bytes, "files", fileName);
-                    HttpResponseMessage message= await client.PostAsync("http://localhost:52464/", multiContent);
-                 }
-             }
-
-
-             return RedirectToAction("HomePage");
-         }*/
 
 
         [HttpPost]
@@ -150,7 +110,6 @@ namespace EBook_Reader.Controllers
                     byte[] data;
                     using (var br = new BinaryReader(file.OpenReadStream()))
                         data = br.ReadBytes((int)file.OpenReadStream().Length);
-
                     ByteArrayContent bytes = new ByteArrayContent(data);
                     MultipartFormDataContent multiContent = new MultipartFormDataContent();
                     string fileName = file.FileName;
@@ -292,6 +251,7 @@ namespace EBook_Reader.Controllers
             }
             try
             {
+
                 if(id != null)
                 {
                     var comments = context_.Comments.Where(s => (id==s.DocumentId));
@@ -311,14 +271,26 @@ namespace EBook_Reader.Controllers
                     context_.SaveChanges();
                 }
           
-            using (var result = await client.DeleteAsync("http://localhost:52464/api/files" + "/" + document.DocumentName))
-            {
-                if (result.IsSuccessStatusCode)
-                {
+                using (var result = await client.DeleteAsync("http://localhost:52464/api/files" + "/" + document.DocumentName))
+                    {
+                    if (result.IsSuccessStatusCode)
+                    {
 
-                }
+                    }
+                    String [] lstFiles=Directory.GetFiles(filePath);
+                    for(int i=0; i<lstFiles.Length;i++){
+                        string fileName = Path.GetFileName(lstFiles[i]);
+                        if (fileName.Equals(document.DocumentName))
+                        {
+                            if (System.IO.File.Exists(Path.Combine(filePath, document.DocumentName)))
+                            {
+                                // If file found, delete it    
+                                System.IO.File.Delete(Path.Combine(filePath, document.DocumentName));
+                            }
+                        }
 
-                }
+                    }  
+                   }
             }
             catch (Exception)
             {
@@ -328,13 +300,22 @@ namespace EBook_Reader.Controllers
         }
 
         //----< show list of lectures, ordered by Title >------------
-        public IActionResult viewComment()
+        public IActionResult viewComment(int? id)
         {
             var request = HttpContext.Request;
+            IQueryable < Comments >  lects;
             string sessionUserName = HttpContext.Session.GetString("SessionUserName");
 
             // fluent API
-            var lects = context_.Comments.Include(l => l.Document).Where(l=>sessionUserName.Equals(l.userName));
+            if (sessionUserName.Equals("nkataman@syr.edu"))
+            {
+                lects = context_.Comments.Include(l => l.Document).Where(l => (sessionUserName.Equals(l.userName)));
+            }
+            else
+            {
+
+                lects = context_.Comments.Include(l => l.Document).Where(l => (sessionUserName.Equals(l.userName) && id == l.DocumentId));
+            }
             var orderedLects = lects.OrderBy(l => l.Comment)
               .OrderBy(l => l.Document)
               .Select(l => l);
